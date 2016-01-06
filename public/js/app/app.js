@@ -1,4 +1,4 @@
-var app = angular.module('groceryList', []);
+var app = angular.module('groceryList', ['mgcrea.pullToRefresh']);
 
 
 
