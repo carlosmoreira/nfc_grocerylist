@@ -14,15 +14,19 @@ class GroceryItemsController extends Controller
         return GroceryItem::where('bought' , 0)->get();
     }
 
-    public function newGroceryItem(Requests\GroceryItemRequest $request){
-        die('x');
-        $gi = new GroceryItem();
-        $gi->name = $request->get('name');
-        $gi->inCart = 0;
-        $gi->bought = 0;
-        $gi->save();
-        return ['Success'=> 'Item Saved'];
-        //return "Test";
+    public function store(Request $request){
+        $validator = \Validator::make($request->all(),['name'=>'required']);
+        if($validator->passes()){
+            $gi = new GroceryItem();
+            $gi->name = $request->get('name');
+            $gi->inCart = 0;
+            $gi->bought = 0;
+            $gi->save();
+            return ['Success'=> 'Item Saved'];
+        }else{
+            return ['Error'=> $validator->errors()->all()];
+        }
+
     }
 
     public function update(Request $request, $id){

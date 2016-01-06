@@ -18,8 +18,6 @@ Route::get('/', function () {
 
 Route::resource('groceryitem', 'GroceryItemsController');
 Route::post('groceryitem/buyCart', 'GroceryItemsController@buyCart');
-Route::get('/newGroceryItem', 'GroceryItemsController@newGroceryItem');
-
 
 
 /*

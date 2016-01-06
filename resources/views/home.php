@@ -1,7 +1,9 @@
 <!doctype html>
 <html lang="en" ng-app="groceryList">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Grocery List</title>
     <link rel="stylesheet" href="/libs/bootstrap/dist/css/bootstrap.min.css" />
     <script src="/libs/angular/angular.min.js"></script>
@@ -23,7 +25,10 @@
         .inCart{
             text-decoration: line-through;
         }
+
     </style>
+    <link rel="stylesheet" href="/libs/angular-pull-to-refresh/dist/angular-pull-to-refresh.min.css">
+    <script src="/libs/angular-pull-to-refresh/dist/angular-pull-to-refresh.min.js"></script>
 </head>
 <body ng-controller="GroceryList as gl" ng-init="gl.init()">
 <div>
@@ -32,13 +37,15 @@
         <button ng-click="gl.finishShopping()" id="finishShopping" class="btn btn-primary pull-right">Finish Shopping</button>
     </div>
 
-    <ul id="groceryItems" ng-repeat="item in gl.groceryList">
-        <li ng-class="{ 'inCart'  : item.inCart }"
-            ng-click="gl.setIncart(item)">
-            <i ng-if="item.inCart" class="glyphicon glyphicon-shopping-cart"></i>
-            {{item.name}}
-        </li>
-    </ul>
+    <div pull-to-refresh="gl.init()">
+        <ul id="groceryItems" ng-repeat="item in gl.groceryList" >
+            <li ng-class="{ 'inCart'  : item.inCart }"
+                ng-click="gl.setIncart(item)">
+                <i ng-if="item.inCart" class="glyphicon glyphicon-shopping-cart"></i>
+                {{item.name}}
+            </li>
+        </ul>
+    </div>
 </div>
 
 </body>
