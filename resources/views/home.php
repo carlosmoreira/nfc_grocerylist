@@ -25,6 +25,9 @@
         .inCart{
             text-decoration: line-through;
         }
+        .pull-to-refresh{
+            margin:auto !IMPORTANT;
+        }
 
     </style>
     <link rel="stylesheet" href="/libs/angular-pull-to-refresh/dist/angular-pull-to-refresh.min.css">
@@ -33,19 +36,30 @@
 <body ng-controller="GroceryList as gl" ng-init="gl.init()">
 <div>
     <div class="container">
-        <h2 class="pull-left">Grocery List Items</h2>
-        <button ng-click="gl.finishShopping()" id="finishShopping" class="btn btn-primary pull-right">Finish Shopping</button>
+        <div class="row">
+            <div class="col-md-9">
+                <h2 class="">Grocery List Items</h2>
+            </div>
+            <div class="col-md-3 text-center">
+                <button ng-click="gl.finishShopping()" id="finishShopping" class="btn btn-primary">Finish Shopping</button>
+            </div>
+        </div>
     </div>
 
-    <div pull-to-refresh="gl.init()">
-        <ul id="groceryItems" ng-repeat="item in gl.groceryList" >
-            <li ng-class="{ 'inCart'  : item.inCart }"
-                ng-click="gl.setIncart(item)">
-                <i ng-if="item.inCart" class="glyphicon glyphicon-shopping-cart"></i>
-                {{item.name}}
-            </li>
-        </ul>
+    <div class="row">
+        <div class="col-md-12">
+            <div pull-to-refresh="gl.init()">
+                <ul id="groceryItems" ng-repeat="item in gl.groceryList" >
+                    <li ng-class="{ 'inCart'  : item.inCart }"
+                        ng-click="gl.setIncart(item)">
+                        <i ng-if="item.inCart" class="glyphicon glyphicon-shopping-cart"></i>
+                        {{item.name}}
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
+
 </div>
 
 </body>
