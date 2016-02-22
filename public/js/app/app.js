@@ -8,6 +8,8 @@ app.controller('GroceryList', function ($http) {
 
     vm.groceryList = ['1','2','3'];
 
+    vm.showAddForm = false;
+
     vm.init = function(){
         $http.get('/groceryitem').then(
             function(resp){
@@ -16,6 +18,19 @@ app.controller('GroceryList', function ($http) {
             },
             function(err){console.log(err);}
         );
+    };
+
+    vm.saveGroceryItem = function(gitem){
+        $http.post('/groceryitem', gitem).then(
+            function(resp){
+                if(resp.data.Success) {
+                    vm.showAddForm = false;
+                    vm.init();
+                }
+            },function(err){
+                console.log('Error', err);
+            }
+        )
     };
 
     vm.finishShopping = function(){

@@ -19,7 +19,6 @@ Route::get('/', function () {
 Route::resource('groceryitem', 'GroceryItemsController');
 Route::post('groceryitem/buyCart', 'GroceryItemsController@buyCart');
 
-
 /*
 |--------------------------------------------------------------------------
 | Application Routes
